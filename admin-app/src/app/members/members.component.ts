@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../member'
 import { MEMBERS } from '../mock-menbers';
+import { MemberService } from '../member.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-members',
@@ -9,20 +11,26 @@ import { MEMBERS } from '../mock-menbers';
 })
 export class MembersComponent implements OnInit {
 
-  members = MEMBERS;
-  member: Member = {
-    id: 1,
-    name: '山田 幸弘'
-  };
+  members: Member[];
   selectedMember: Member;
 
-  constructor() { }
+  constructor(
+    private memberService: MemberService,
+    private messageService: MessageService
+    ) { }
 
   ngOnInit(): void {
+    this.getMembers();
   }
 
   onSelect(member: Member): void {
     this.selectedMember = member;
+    this.messageService.add('MembersComponent: 社員データ(id=${member.id})が選択されました');
+  }
+
+  getMembers(): void {
+    this.memberService.getMembers() // Observable
+      .subscribe(members => this.members = members);
   }
 
 }

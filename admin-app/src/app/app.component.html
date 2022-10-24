@@ -1,4 +1,8 @@
 <h1>{{ title }}</h1>
+<nav>
+  <a routerLink="/dashboard">ダッシュボード</a>
+  <a routerLink="/members">社員一覧</a>
+</nav>
 
-<app-members></app-members>
+<router-outlet></router-outlet>
 <app-messages></app-messages>

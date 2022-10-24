@@ -25,12 +25,11 @@ export class MembersComponent implements OnInit {
 
   onSelect(member: Member): void {
     this.selectedMember = member;
-    this.messageService.add('MembersComponent: 社員データ(id=${member.id})が選択されました');
+    this.messageService.add(`MembersComponent: 社員データ(id=${member.id})が選択されました`);
   }
 
   getMembers(): void {
     this.memberService.getMembers() // Observable
       .subscribe(members => this.members = members);
   }
-
 }
